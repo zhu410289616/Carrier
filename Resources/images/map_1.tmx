@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="60" tileheight="60">
+ <tileset firstgid="1" name="green_road@2x" tilewidth="60" tileheight="60">
+  <image source="green_road@2x.png" width="60" height="60"/>
+ </tileset>
+ <tileset firstgid="2" name="green_tree@2x" tilewidth="60" tileheight="60">
+  <image source="green_tree@2x.png" width="60" height="60"/>
+ </tileset>
+ <tileset firstgid="3" name="red_wall@2x" tilewidth="60" tileheight="60">
+  <image source="red_wall@2x.png" width="60" height="60"/>
+ </tileset>
+ <tileset firstgid="4" name="house_blue@2x" tilewidth="60" tileheight="60">
+  <image source="house_blue@2x.png" width="60" height="60"/>
+ </tileset>
+ <tileset firstgid="5" name="house_red@2x" tilewidth="60" tileheight="60">
+  <image source="house_red@2x.png" width="60" height="60"/>
+ </tileset>
+ <tileset firstgid="6" name="house_yellow@2x" tilewidth="60" tileheight="60">
+  <image source="house_yellow@2x.png" width="60" height="60"/>
+ </tileset>
+ <tileset firstgid="7" name="red_barricade@2x" tilewidth="60" tileheight="60">
+  <image source="red_barricade@2x.png" width="60" height="60"/>
+ </tileset>
+ <tileset firstgid="8" name="scenery_tree@2x" tilewidth="60" tileheight="60">
+  <image source="scenery_tree@2x.png" width="60" height="60"/>
+ </tileset>
+ <tileset firstgid="9" name="yellow_flower@2x" tilewidth="60" tileheight="60">
+  <image source="yellow_flower@2x.png" width="60" height="60"/>
+ </tileset>
+ <tileset firstgid="10" name="balloon@2x" tilewidth="60" tileheight="60">
+  <image source="balloon@2x.png" width="60" height="60"/>
+ </tileset>
+ <tileset firstgid="11" name="box@2x" tilewidth="60" tileheight="60">
+  <image source="box@2x.png" width="60" height="60"/>
+ </tileset>
+ <tileset firstgid="12" name="pool_down@2x" tilewidth="60" tileheight="60">
+  <image source="pool_down@2x.png" width="60" height="60"/>
+ </tileset>
+ <tileset firstgid="13" name="pool_left@2x" tilewidth="60" tileheight="60">
+  <image source="pool_left@2x.png" width="60" height="60"/>
+ </tileset>
+ <tileset firstgid="14" name="pool_right@2x" tilewidth="60" tileheight="60">
+  <image source="pool_right@2x.png" width="60" height="60"/>
+ </tileset>
+ <tileset firstgid="15" name="pool_up@2x" tilewidth="60" tileheight="60">
+  <image source="pool_up@2x.png" width="60" height="60"/>
+ </tileset>
+ <layer name="bg_layer" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjZGBgYBzFo3gUj+IhgAHGRgEt
+  </data>
+ </layer>
+ <layer name="green_tree_layer" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYmBgYBqiGBlQwwx8gNrmETKXEkBN86jtPmqGHSHzSDWbWmmH2mlxsJg3GDAAdj0BgQ==
+  </data>
+ </layer>
+ <layer name="red_house_layer" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAOsBKpjlr68JlBDTNHwcABVgbaxyE1zR9M6Q1f2JHjzoHyG7lpAACUNABH
+  </data>
+ </layer>
+ <layer name="blue_house_layer" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgYwALF5OhDpolRS22AzVxy/TPYAbX9NNjNowWghxtJyRfk6qGWPygxBwCugABJ
+  </data>
+ </layer>
+ <layer name="red_wall_layer" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBi6gBkJU8MMZhxipJhPjFpizCXXblzqyQkjQu6jpnkweWL9TK2woSQN4TKPXEAL8yhJy4MRAABSEwCI
+  </data>
+ </layer>
+ <layer name="layer1" width="20" height="15" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJytk0sKwDAIRCUxXbT3v28JKITp+FlUmE3Q51jtEJHR0GrkXD/WZYxlmoeQt6WN3hMk5A35jKsmZ0RxF76Zrx2PKQvGPHneH/14YI9dE+2vmpN5dZ4r2wUG+va8zencXcSNdlHd8Ep47DY6/xjbEfKib6f2rvKdObplVpOpm9fhRHNUegHG2gLY
+  </data>
+ </layer>
+ <layer name="box_layer" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFQwFwQ/FQsYPWbh0FIxMAAJroADg=
+  </data>
+ </layer>
+ <layer name="dest_layer" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF9ARcg8z+gXYPsWCouJMaYCT5lVQAAHr4ADM=
+  </data>
+ </layer>
+</map>
