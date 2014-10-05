@@ -31,8 +31,6 @@ public:
     virtual bool initWithLevel(Level *level);
     static MapLayer *create(Level *level);
     
-    MoveCheckCode shouldMoveWithNextPosition(CCPoint nextPosition);
-    
     //触摸点坐标转化成地图上的坐标点
     CCPoint tileCoordinateWithPosition(CCPoint position);
     //将地图坐标转换成瓦片值

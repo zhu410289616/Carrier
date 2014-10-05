@@ -16,15 +16,15 @@ USING_NS_CC;
 
 class Man : public cocos2d::CCSprite {
 private:
-    
+    MoveDirection direction;
     
 public:
     virtual bool init();
     CREATE_FUNC(Man);
     
     CCPoint positionWithDirection(MoveDirection direction);
-    void setFaceDirection(MoveDirection direction);
-    void move(MoveDirection direction);
+    void setFaceDirection(MoveDirection faceDirection);
+    void move(MoveDirection moveDirection);
 };
 
 #endif /* defined(__Map__Man__) */

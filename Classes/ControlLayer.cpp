@@ -49,22 +49,17 @@ void ControlLayer::doMoveLogic(cocos2d::CCPoint beginPoint, cocos2d::CCPoint end
 {
     MoveDirection direction = this->directionWithTouchPorints(beginPoint, endPoint);
     if (MoveDirectionUnknow != direction) {
-        
-        MoveCheckCode checkCode = this->shouldMoveManWithDirection(this->man, direction);
-        checkCode = mapLayer->shouldMoveWithNextPosition(man->positionWithDirection(direction));
-        
-//        MoveCheckCode checkCode = this->shouldMoveManWithDirection(this->man, direction);
-        if (MoveCheckCodeNone) {
+        //检测某个方向能否移动
+        MoveCheckCode checkCode = this->shouldMoveWithDirection(direction);
+        if (MoveCheckCodeNone == checkCode) {
             this->man->setFaceDirection(direction);
         } else if (MoveCheckCodeMoveMan == checkCode) {
-//            this->man->stopAllActions();
             this->man->move(direction);
         } else if (MoveCheckCodeMoveManAndBox == checkCode) {
-//            this->man->stopAllActions();
+            //todo
+            //移动箱子，并调整原有元素位置
             this->man->move(direction);
-            //todo move box
         }
-        
     }//if
 }
 
@@ -93,57 +88,103 @@ MoveDirection ControlLayer::directionWithTouchPorints(cocos2d::CCPoint beginPoin
     return direction;
 }
 
-MoveCheckCode ControlLayer::shouldMoveManWithDirection(Man *man, MoveDirection direction)
+CCPoint ControlLayer::nextPositionWithDirection(MoveDirection direction, cocos2d::CCPoint currentPosition)
 {
-    MoveCheckCode checkCode = MoveCheckCodeFailed;
-    
-    //todo
-    CCPoint nextPosition = man->positionWithDirection(direction);
-    CCLOG("nextPosition.x: %f, nextPosition.y: %f", nextPosition.x, nextPosition.y);
-    int tileId = mapLayer->tileIdWithPosition(nextPosition);
-    CCLOG("man->getPositionX(): %f, man->getPositionY(): %f, tileId: %d", man->getPositionX(), man->getPositionY(), tileId);
-    switch (tileId) {
-        case 3:
+    int posx = currentPosition.x;
+    int posy = currentPosition.y;
+    switch (direction) {
+        case MoveDirectionUp:
         {
-            return MoveCheckCodeNone;
+            posy += kTileSizeHeight;
         }
             break;
-        case 11:
+        case MoveDirectionDown:
         {
-            return MoveCheckCodeMoveBox;
+            posy -= kTileSizeHeight;
+        }
+            break;
+        case MoveDirectionLeft:
+        {
+            posx -= kTileSizeWidth;
+        }
+            break;
+        case MoveDirectionRight:
+        {
+            posx += kTileSizeWidth;
         }
             break;
             
         default:
             break;
     }
-    
-    checkCode = MoveCheckCodeMoveMan;
-    
+    return ccp(posx, posy);
+}
+
+MoveCheckCode ControlLayer::shouldMoveWithDirection(MoveDirection direction)
+{
+    MoveCheckCode checkCode = MoveCheckCodeNone;
+    CCPoint nextPosition = this->nextPositionWithDirection(direction, man->getPosition());
+    checkCode = this->shouldMoveOfManWithPosition(nextPosition);
+    if (MoveCheckCodeMoveMan == checkCode) {
+        //只移动man
+    } else if (MoveCheckCodeCheckBox == checkCode) {
+        //man的下一个位置是box，继续检测box后面的一个位置可否移动
+        CCPoint nextNextPosition = this->nextPositionWithDirection(direction, nextPosition);
+        checkCode = this->shouldMoveOfBoxWithPosition(nextNextPosition);
+    }
     return checkCode;
 }
 
-MoveCheckCode ControlLayer::shouldMoveBoxWithDirection(Box *box, MoveDirection direction)
+/**
+ *  检测下一个移动坐标位置
+ *  1. 如果下一个是地面，则可以移动man
+ *  2. 如果下一个是箱子，则继续检测箱子后面的一个位置
+ *  3. 如果是其他元素，则不允许移动，只改变man的方向
+ *
+ *  @param nextPosition 下一个需要到达的坐标位置
+ *
+ *  @return 返回检测结果
+ */
+MoveCheckCode ControlLayer::shouldMoveOfManWithPosition(cocos2d::CCPoint nextPosition)
 {
-    MoveCheckCode checkCode = MoveCheckCodeFailed;
-    
-    //todo
-    CCPoint nextPosition = box->positionWithDirection(direction);
-    CCLOG("nextPosition.x: %f, nextPosition.y: %f", nextPosition.x, nextPosition.y);
+    MoveCheckCode checkCode = MoveCheckCodeNone;
     int tileId = mapLayer->tileIdWithPosition(nextPosition);
-    CCLOG("man->getPositionX(): %f, man->getPositionY(): %f, tileId: %d", man->getPositionX(), man->getPositionY(), tileId);
-    
+    CCLOG("nextPosition.x: %f, nextPosition.y: %f, tileId: %d", nextPosition.x, nextPosition.y, tileId);
     switch (tileId) {
-        case 0:
+        case ElementTypeNone:
+        case ElementTypeGreenRoad:
         {
-            return MoveCheckCodeMoveBox;
+            return MoveCheckCodeMoveMan;
+        }
+            break;
+        case ElementTypeBox:
+        {
+            return MoveCheckCodeCheckBox;
         }
             break;
             
         default:
             break;
     }
-    
+    return checkCode;
+}
+
+MoveCheckCode ControlLayer::shouldMoveOfBoxWithPosition(cocos2d::CCPoint nextPosition)
+{
+    MoveCheckCode checkCode = MoveCheckCodeNone;
+    int tileId = mapLayer->tileIdWithPosition(nextPosition);
+    CCLOG("nextPosition.x: %f, nextPosition.y: %f, tileId: %d", nextPosition.x, nextPosition.y, tileId);
+    switch (tileId) {
+        case ElementTypeNone:
+        case ElementTypeGreenRoad:
+        {
+            return MoveCheckCodeMoveManAndBox;
+        }
+            break;
+            
+        default:
+            break;
+    }
     return checkCode;
 }
 

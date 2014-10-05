@@ -47,7 +47,8 @@ bool GameScene::init()
     
     //初始化搬运工
     Man *man = Man::create();//todo
-    man->setPosition(mapLayer->positionWithTileCoordinate(ccp(5, 7)));
+    CCPoint point = mapLayer->positionWithTileCoordinate(ccp(5, 7));
+    man->setPosition(ccp(point.x + 2, point.y + 2));
     man->setAnchorPoint(ccp(0, 0));
     mapLayer->addChild(man, 1);
     

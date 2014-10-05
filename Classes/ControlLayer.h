@@ -31,8 +31,11 @@ protected:
     
     void doMoveLogic(CCPoint beginPoint, CCPoint endPoint);
     MoveDirection directionWithTouchPorints(CCPoint beginPoint, CCPoint endPoint);
-    MoveCheckCode shouldMoveManWithDirection(Man *man, MoveDirection direction);
-    MoveCheckCode shouldMoveBoxWithDirection(Box *box, MoveDirection direction);
+    CCPoint nextPositionWithDirection(MoveDirection direction, CCPoint currentPosition);
+    MoveCheckCode shouldMoveWithDirection(MoveDirection direction);
+    MoveCheckCode shouldMoveOfManWithPosition(CCPoint nextPosition);
+    MoveCheckCode shouldMoveOfBoxWithPosition(CCPoint nextPosition);
+    
     void taskFinished();
     
 public:

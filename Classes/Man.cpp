@@ -10,7 +10,7 @@
 
 bool Man::init()
 {
-    if (!CCSprite::initWithFile("balloon@2x.png")) {
+    if (!CCSprite::initWithFile("boxman_down@2x.png")) {
         return false;
     }
     
@@ -53,34 +53,45 @@ CCPoint Man::positionWithDirection(MoveDirection direction)
     return ccp(posx, posy);
 }
 
-void Man::setFaceDirection(MoveDirection direction)
+void Man::setFaceDirection(MoveDirection faceDirection)
 {
-    CCLOG("Man::setFaceDirection: %d", direction);
-    switch (direction) {
+    CCLOG("Man::setFaceDirection: %d", faceDirection);
+    std::string fileName = "boxman_down@2x.png";
+    switch (faceDirection) {
         case MoveDirectionUp:
         {
-            CCLOG("");
+            fileName = "boxman_up@2x.png";
         }
             break;
         case MoveDirectionDown:
-        {}
+        {
+            fileName = "boxman_down@2x.png";
+        }
             break;
         case MoveDirectionLeft:
-        {}
+        {
+            fileName = "boxman_left@2x.png";
+        }
             break;
         case MoveDirectionRight:
-        {}
+        {
+            fileName = "boxman_right@2x.png";
+        }
             break;
             
         default:
             break;
     }
+    CCLog("fileName: %s", fileName.c_str());
+    CCSprite *sprite = CCSprite::create(fileName.c_str());
+    this->setTexture(sprite->getTexture());
+    this->direction = faceDirection;
 }
 
-void Man::move(MoveDirection direction)
+void Man::move(MoveDirection moveDirection)
 {
-    CCLOG("Man::move: %d", direction);
-    switch (direction) {
+    CCLOG("Man::move: %d", moveDirection);
+    switch (moveDirection) {
         case MoveDirectionUp:
         {
             this->setPosition(ccp(this->getPosition().x, this->getPosition().y + kTileSizeWidth));
@@ -105,4 +116,5 @@ void Man::move(MoveDirection direction)
         default:
             break;
     }
+    this->setFaceDirection(moveDirection);
 }

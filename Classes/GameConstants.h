@@ -23,9 +23,8 @@ typedef enum {
 typedef enum {
     MoveCheckCodeNone = 0,
     MoveCheckCodeMoveMan = 1,
-    MoveCheckCodeMoveBox = 2,
+    MoveCheckCodeCheckBox = 2,
     MoveCheckCodeMoveManAndBox = 3,
-    MoveCheckCodeFailed = 4,
     MoveCheckCodeUnknow
 } MoveCheckCode;
 
@@ -33,25 +32,25 @@ typedef enum {
     ElementTypeNone = 0,
     ElementTypeNormal = 1,
     
-    ElementTypeGreenRoad,
-    ElementTypeBox,
-    ElementTypePoolUp,
-    ElementTypePoolDown,
-    ElementTypePoolLeft,
-    ElementTypePoolRight,
-    ElementTypegGreenTree,
-    ElementTypeGreenShrub,
-    ElementTypeSceneryTree,
-    ElementTypeRedBarricade,
-    ElementTypeBlueHouse,
-    ElementTypeRedHouse,
-    ElementTypeYellowHouse,
-    ElementTypeRedWall,
-    ElementTypeYellowFlower,
-    ElementTypeBalloon,
-    ElementTypeMan,
+    ElementTypeGreenRoad = 2,
+    ElementTypeBox = 3,
+    ElementTypePoolUp = 4,
+    ElementTypePoolDown = 5,
+    ElementTypePoolLeft = 6,
+    ElementTypePoolRight = 7,
+    ElementTypegGreenTree = 8,
+    ElementTypeGreenShrub = 9,
+    ElementTypeSceneryTree = 10,
+    ElementTypeRedBarricade = 11,
+    ElementTypeBlueHouse = 12,
+    ElementTypeRedHouse = 13,
+    ElementTypeYellowHouse = 14,
+    ElementTypeRedWall = 15,
+    ElementTypeYellowFlower = 16,
+    ElementTypeBalloon = 17,
+    ElementTypeMan = 18,
     
-    ElementTypeUnknow
+    ElementTypeUnknow = 999
 } ElementType;
 
 #endif

@@ -43,38 +43,6 @@ bool MapLayer::initWithLevel(Level *level)
     return true;
 }
 
-#pragma move logic 
-
-MoveCheckCode MapLayer::shouldMoveWithNextPosition(cocos2d::CCPoint nextPosition)
-{
-    MoveCheckCode checkCode = MoveCheckCodeFailed;
-    
-    CCLOG("nextPosition.x: %f, nextPosition.y: %f", nextPosition.x, nextPosition.y);
-    int tileId = this->tileIdWithPosition(nextPosition);
-    switch (tileId) {
-        case 0:
-        {
-            checkCode = MoveCheckCodeMoveMan;
-        }
-            break;
-        case 3:
-        {
-            checkCode = MoveCheckCodeNone;
-        }
-            break;
-        case 11:
-        {
-            checkCode = MoveCheckCodeMoveBox;
-        }
-            break;
-            
-        default:
-            break;
-    }
-    
-    return checkCode;
-}
-
 //触摸点坐标转化成地图上的坐标点
 CCPoint MapLayer::tileCoordinateWithPosition(cocos2d::CCPoint position)
 {
