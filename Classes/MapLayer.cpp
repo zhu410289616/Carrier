@@ -96,6 +96,11 @@ int MapLayer::tileIdWithPosition(cocos2d::CCPoint position)
     if ((coordinatex >= 0) && (coordinatex < bgLayerSize.width) && (coordinatey >= 0) && (coordinatey < bgLayerSize.height)) {
         CCPoint tileCoordinate = ccp(coordinatex, coordinatey);
         int tileId = redWallLayer->tileGIDAt(tileCoordinate);
+        CCDictionary *tileDic = gameMap->propertiesForGID(tileId);
+        if (tileDic) {
+            CCString *value = (CCString *)tileDic->objectForKey("collion");
+            CCLog("value: %s", value->getCString());
+        }
         if (tileId < 1) {
             tileId = boxLayer->tileGIDAt(tileCoordinate);
         }
