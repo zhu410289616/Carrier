@@ -40,7 +40,16 @@ bool MapLayer::initWithLevel(Level *level)
     boxLayer = gameMap->layerNamed("box_layer");
     destLayer = gameMap->layerNamed("desc_layer");
     
+    objects = gameMap->objectGroupNamed("object1");
+    CCDictionary *object1 = objects->objectNamed("object_test1");
+    CCLog("object1 x: %s", object1->valueForKey("x")->getCString());
+    
     return true;
+}
+
+void MapLayer::initBox()
+{
+    //todo
 }
 
 //触摸点坐标转化成地图上的坐标点

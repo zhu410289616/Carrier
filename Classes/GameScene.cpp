@@ -42,7 +42,7 @@ bool GameScene::init()
     
     //根据关卡初始化地图
     MapLayer *mapLayer = MapLayer::create(currentLevel);
-    mapLayer->setPosition(0, 0);
+    mapLayer->setPosition(origin.x, origin.y / 2);//宽度固定y坐标调整
     this->addChild(mapLayer);
     
     //初始化搬运工
@@ -54,7 +54,7 @@ bool GameScene::init()
     
     //控制层
     controlLayer = ControlLayer::create();
-    controlLayer->setPosition(0, 0);
+    controlLayer->setPosition(origin.x, origin.y);
     controlLayer->mapLayer = mapLayer;
     controlLayer->man = man;
     this->addChild(controlLayer);

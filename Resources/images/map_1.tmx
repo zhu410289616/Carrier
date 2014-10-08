@@ -85,4 +85,9 @@
    eJxjYBgF9ARcg8z+gXYPsWCouJMaYCT5lVQAAHr4ADM=
   </data>
  </layer>
+ <objectgroup name="object1" width="20" height="15">
+  <object x="540" y="560" width="56" height="36"/>
+  <object name="object_test1" x="568" y="580"/>
+  <object x="561" y="575"/>
+ </objectgroup>
 </map>
