@@ -8,6 +8,17 @@
 
 #include "Level.h"
 
+Level *Level::create(uint32_t levelNumber)
+{
+    Level *level = new Level();
+    if (level->initWithLevelNumber(levelNumber)) {
+        level->autorelease();
+        return level;
+    }
+    CC_SAFE_RELEASE(level);
+    return NULL;
+}
+
 Level *Level::create(cocos2d::CCDictionary *dict)
 {
     Level *level = new Level();
@@ -21,6 +32,14 @@ Level *Level::create(cocos2d::CCDictionary *dict)
 
 bool Level::init()
 {
+    return true;
+}
+
+bool Level::initWithLevelNumber(uint32_t levelNumber)
+{
+    number = levelNumber;
+    mapName = CCString::createWithFormat("map_%d.tmx", levelNumber);
+    
     return true;
 }
 

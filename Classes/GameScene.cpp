@@ -38,7 +38,7 @@ bool GameScene::init()
     
     //关卡
     Level *currentLevel = LevelManager::sharedInstance()->currentLevel;
-    CCLOG("currentLevel->mapName: %s", currentLevel->mapName->m_sString.c_str());
+    CCLOG("currentLevel->mapName: %s", currentLevel->mapName->getCString());
     
     //根据关卡初始化地图
     MapLayer *mapLayer = MapLayer::create(currentLevel);
@@ -47,10 +47,11 @@ bool GameScene::init()
     
     //初始化搬运工
     Man *man = Man::create();//todo
+    man->setScale(0.6);
     CCPoint point = mapLayer->positionWithTileCoordinate(ccp(5, 7));
     man->setPosition(ccp(point.x + 2, point.y + 2));
     man->setAnchorPoint(ccp(0, 0));
-    mapLayer->addChild(man, 1);
+    mapLayer->addChild(man, 9);
     
     //控制层
     controlLayer = ControlLayer::create();

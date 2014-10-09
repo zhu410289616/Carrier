@@ -10,7 +10,7 @@
 
 bool Box::init()
 {
-    if (!CCSprite::initWithFile("box.png")) {
+    if (!CCSprite::initWithFile("box@2x.png")) {
         return false;
     }
     return true;

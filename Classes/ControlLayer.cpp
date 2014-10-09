@@ -148,43 +148,51 @@ MoveCheckCode ControlLayer::shouldMoveWithDirection(MoveDirection direction)
 MoveCheckCode ControlLayer::shouldMoveOfManWithPosition(cocos2d::CCPoint nextPosition)
 {
     MoveCheckCode checkCode = MoveCheckCodeNone;
-    int tileId = mapLayer->tileIdWithPosition(nextPosition);
-    CCLOG("nextPosition.x: %f, nextPosition.y: %f, tileId: %d", nextPosition.x, nextPosition.y, tileId);
-    switch (tileId) {
-        case ElementTypeNone:
-        case ElementTypeGreenRoad:
-        {
-            return MoveCheckCodeMoveMan;
-        }
-            break;
-        case ElementTypeBox:
-        {
-            return MoveCheckCodeCheckBox;
-        }
-            break;
-            
-        default:
-            break;
+    
+    //1.先检测red wall碰撞
+    int redWallTileId = mapLayer->tileIdOfRedWallWithPosition(nextPosition);
+    CCLOG("nextPosition.x: %f, nextPosition.y: %f, redWallTileId: %d", nextPosition.x, nextPosition.y, redWallTileId);
+    
+    if (redWallTileId > 0) {
+        return MoveCheckCodeNone;
     }
+    
+    //2.检测box碰撞
+    if (redWallTileId <= 0) {
+        Box *checkBox = mapLayer->boxWithPosition(nextPosition);
+        if (NULL == checkBox) {
+            //todo MoveCheckCodeMoveMan
+            checkCode = MoveCheckCodeMoveMan;
+        } else {
+            //todo MoveCheckCodeCheckBox
+            checkCode = MoveCheckCodeCheckBox;
+        }
+    }
+    
     return checkCode;
 }
 
 MoveCheckCode ControlLayer::shouldMoveOfBoxWithPosition(cocos2d::CCPoint nextPosition)
 {
     MoveCheckCode checkCode = MoveCheckCodeNone;
-    int tileId = mapLayer->tileIdWithPosition(nextPosition);
-    CCLOG("nextPosition.x: %f, nextPosition.y: %f, tileId: %d", nextPosition.x, nextPosition.y, tileId);
-    switch (tileId) {
-        case ElementTypeNone:
-        case ElementTypeGreenRoad:
-        {
-            return MoveCheckCodeMoveManAndBox;
-        }
-            break;
-            
-        default:
-            break;
+    
+    //1.先检测red wall碰撞
+    int redWallTileId = mapLayer->tileIdOfRedWallWithPosition(nextPosition);
+    CCLOG("nextPosition.x: %f, nextPosition.y: %f, redWallTileId: %d", nextPosition.x, nextPosition.y, redWallTileId);
+    
+    if (redWallTileId > 0) {
+        return MoveCheckCodeNone;
     }
+    
+    //2.检测box碰撞
+    if (redWallTileId <= 0) {
+        //todo MoveCheckCodeMoveManAndBox
+        Box *checkBox = mapLayer->boxWithPosition(nextPosition);
+        if (NULL == checkBox) {
+            checkCode = MoveCheckCodeMoveManAndBox;
+        }
+    }
+    
     return checkCode;
 }
 

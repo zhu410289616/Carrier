@@ -22,6 +22,9 @@ public:
     virtual bool init();
     CREATE_FUNC(LevelManager);
     
+    void setCurrentLevel(unsigned int levelNumber);
+    Level *getCurrentLevel();
+    
     bool shouldGotoPrevLevel();
     bool shouldGotoNextLevel();
     Level *prevLevel();

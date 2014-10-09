@@ -9,8 +9,12 @@
 #ifndef Map_GameConstants_h
 #define Map_GameConstants_h
 
+//tile map网格
 #define kTileSizeWidth              60.0f
 #define kTileSizeHeight             60.0f
+
+//
+#define kLevelNumberKey             "kLevelNumberKey"
 
 typedef enum {
     MoveDirectionUp = 0,
