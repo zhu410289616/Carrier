@@ -15,6 +15,7 @@
 class GameScene : public cocos2d::CCLayer {
 private:
     ControlLayer *controlLayer;
+    //todo quit
     
 public:
     virtual bool init();
