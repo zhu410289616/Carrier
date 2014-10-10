@@ -11,17 +11,27 @@
 
 #include "cocos2d.h"
 #include "cocos-ext.h"
+#include "Level.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;
 
+class LevelLayerDelegate {
+    
+public:
+    virtual void didLevelSelected(Level *level) = 0;
+};
+
 class LevelLayer : public cocos2d::CCLayer, public cocos2d::extension::CCTableViewDataSource, public cocos2d::extension::CCTableViewDelegate {
 private:
     CCTableView *mDataTableView;
+    LevelLayerDelegate *mDelegate;
     
 public:
     virtual bool init();
     CREATE_FUNC(LevelLayer);
+    
+    void setDelegate(LevelLayerDelegate *delegate);
     
     //暂时没有用，因为继承了抽象类必须重写
     virtual void scrollViewDidScroll(cocos2d::extension::CCScrollView *scrollView){}

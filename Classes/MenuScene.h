@@ -14,7 +14,7 @@
 
 USING_NS_CC;
 
-class MenuScene : public cocos2d::CCLayer {
+class MenuScene : public cocos2d::CCLayer, public LevelLayerDelegate {
 private:
     LevelLayer *mLevelLayer;
     //todo setting
@@ -24,6 +24,9 @@ public:
     
     virtual bool init();
     CREATE_FUNC(MenuScene);
+    
+    //LevelLayerDelegate
+    virtual void didLevelSelected(Level *level);
     
     //setting callback
     void menuSettingCallback(CCObject *pSender);

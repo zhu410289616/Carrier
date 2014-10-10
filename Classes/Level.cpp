@@ -8,7 +8,7 @@
 
 #include "Level.h"
 
-Level *Level::create(uint32_t levelNumber)
+Level *Level::create(unsigned int levelNumber)
 {
     Level *level = new Level();
     if (level->initWithLevelNumber(levelNumber)) {
@@ -35,7 +35,7 @@ bool Level::init()
     return true;
 }
 
-bool Level::initWithLevelNumber(uint32_t levelNumber)
+bool Level::initWithLevelNumber(unsigned int levelNumber)
 {
     number = levelNumber;
     mapName = CCString::createWithFormat("map_%d.tmx", levelNumber);

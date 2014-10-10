@@ -8,6 +8,7 @@
 
 #include "GameScene.h"
 #include "LevelManager.h"
+#include "MenuScene.h"
 
 CCScene *GameScene::scene()
 {
@@ -60,5 +61,19 @@ bool GameScene::init()
     controlLayer->man = man;
     this->addChild(controlLayer);
     
+    //menu
+    CCMenuItemImage *pBackItem = CCMenuItemImage::create("CloseNormal.png", "CloseSelected.png", this, menu_selector(GameScene::menuBackCallback));
+    pBackItem->setPosition(ccp(origin.x + visibleSize.width - pBackItem->getContentSize().width/2, origin.y + pBackItem->getContentSize().height/2));
+    
+    CCMenu *pMenu = CCMenu::create(pBackItem, NULL);
+    pMenu->setPosition(CCPointZero);
+    this->addChild(pMenu, 1);
+    
     return true;
+}
+
+void GameScene::menuBackCallback(cocos2d::CCObject *pSender)
+{
+    CCLog("SettingScene::menuBackCallback...");
+//    CCDirector::sharedDirector()->replaceScene(MenuScene::scene());
 }

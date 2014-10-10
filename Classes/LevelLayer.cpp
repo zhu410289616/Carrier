@@ -27,18 +27,28 @@ bool LevelLayer::init()
     return true;
 }
 
+void LevelLayer::setDelegate(LevelLayerDelegate *delegate)
+{
+    mDelegate = delegate;
+}
+
 #pragma mark CCTableViewDelegate method
 
 void LevelLayer::tableCellTouched(cocos2d::extension::CCTableView *table, cocos2d::extension::CCTableViewCell *cell)
 {
     CCLOG("cell touched at index: %i", cell->getIdx());
+    
+    if (mDelegate) {
+        Level *level = Level::create(cell->getIdx());
+        mDelegate->didLevelSelected(level);
+    }
 }
 
 #pragma mark CCTableViewDataSource method
 
 CCSize LevelLayer::tableCellSizeForIndex(cocos2d::extension::CCTableView *table, unsigned int idx)
 {
-    return CCSizeMake(120, 120);
+    return CCSizeMake(240, 240);
 }
 
 CCTableViewCell *LevelLayer::tableCellAtIndex(cocos2d::extension::CCTableView *table, unsigned int idx)

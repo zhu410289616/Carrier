@@ -18,10 +18,13 @@ private:
     //todo quit
     
 public:
+    static cocos2d::CCScene *scene();
+    
     virtual bool init();
     CREATE_FUNC(GameScene);
     
-    static cocos2d::CCScene *scene();
+    //back callback
+    void menuBackCallback(CCObject *pSender);
 };
 
 #endif /* defined(__Carrier__GameScene__) */

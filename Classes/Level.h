@@ -25,10 +25,10 @@ public:
     
 public:
     virtual bool init();
-    virtual bool initWithLevelNumber(uint32_t levelNumber);
+    virtual bool initWithLevelNumber(unsigned int levelNumber);
     virtual bool initWithDictionary(CCDictionary *dict);
     CREATE_FUNC(Level);
-    static Level *create(uint32_t levelNumber);
+    static Level *create(unsigned int levelNumber);
     static Level *create(CCDictionary *dict);
 };
 

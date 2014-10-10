@@ -153,6 +153,7 @@
 		16771CB219E0DCDC0037B458 /* man_baby_up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 16771CA019E0DCDC0037B458 /* man_baby_up@2x.png */; };
 		16C2B2C019E7806B008AE9A4 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C2B2BE19E7806B008AE9A4 /* background.png */; };
 		16C2B2C119E7806B008AE9A4 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C2B2BF19E7806B008AE9A4 /* background@2x.png */; };
+		16C2B2C519E78DD8008AE9A4 /* SettingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16C2B2C319E78DD8008AE9A4 /* SettingScene.cpp */; };
 		16D9C3FA19C4964700FA26B6 /* balloon.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D9C3D919C4964700FA26B6 /* balloon.png */; };
 		16D9C3FB19C4964700FA26B6 /* balloon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D9C3DA19C4964700FA26B6 /* balloon@2x.png */; };
 		16D9C3FC19C4964700FA26B6 /* box.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D9C3DB19C4964700FA26B6 /* box.png */; };
@@ -602,6 +603,8 @@
 		16771CA019E0DCDC0037B458 /* man_baby_up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "man_baby_up@2x.png"; sourceTree = "<group>"; };
 		16C2B2BE19E7806B008AE9A4 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		16C2B2BF19E7806B008AE9A4 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
+		16C2B2C319E78DD8008AE9A4 /* SettingScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SettingScene.cpp; path = ../Classes/SettingScene.cpp; sourceTree = "<group>"; };
+		16C2B2C419E78DD8008AE9A4 /* SettingScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingScene.h; path = ../Classes/SettingScene.h; sourceTree = "<group>"; };
 		16D9C3D919C4964700FA26B6 /* balloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = balloon.png; sourceTree = "<group>"; };
 		16D9C3DA19C4964700FA26B6 /* balloon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "balloon@2x.png"; sourceTree = "<group>"; };
 		16D9C3DB19C4964700FA26B6 /* box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = box.png; sourceTree = "<group>"; };
@@ -1405,6 +1408,8 @@
 				16F5419719E6B91000EF01A1 /* LevelLayer.h */,
 				16F5419919E6BA8400EF01A1 /* MenuScene.cpp */,
 				16F5419A19E6BA8400EF01A1 /* MenuScene.h */,
+				16C2B2C319E78DD8008AE9A4 /* SettingScene.cpp */,
+				16C2B2C419E78DD8008AE9A4 /* SettingScene.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -2149,6 +2154,7 @@
 				15A3D9A01682F7F9002FB0C5 /* cpSimpleMotor.c in Sources */,
 				15A3D9A11682F7F9002FB0C5 /* cpSlideJoint.c in Sources */,
 				15A3D9A21682F7F9002FB0C5 /* cpArbiter.c in Sources */,
+				16C2B2C519E78DD8008AE9A4 /* SettingScene.cpp in Sources */,
 				15A3D9A31682F7F9002FB0C5 /* cpArray.c in Sources */,
 				15A3D9A41682F7F9002FB0C5 /* cpBB.c in Sources */,
 				15A3D9A51682F7F9002FB0C5 /* cpBBTree.c in Sources */,
