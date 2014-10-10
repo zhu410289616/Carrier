@@ -24,6 +24,9 @@ public:
     
     virtual bool init();
     CREATE_FUNC(MenuScene);
+    
+    //setting callback
+    void menuSettingCallback(CCObject *pSender);
 };
 
 #endif /* defined(__Carrier__MenuScene__) */

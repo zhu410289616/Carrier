@@ -5,9 +5,6 @@
 #include "MenuScene.h"
 #include "GameScene.h"
 
-//test
-#include "LevelScene.h"
-
 USING_NS_CC;
 
 AppDelegate::AppDelegate() {
