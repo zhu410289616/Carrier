@@ -75,12 +75,12 @@
    eJytk0sKwDAIRCUxXbT3v28JKITp+FlUmE3Q51jtEJHR0GrkXD/WZYxlmoeQt6WN3hMk5A35jKsmZ0RxF76Zrx2PKQvGPHneH/14YI9dE+2vmpN5dZ4r2wUG+va8zencXcSNdlHd8Ep47DY6/xjbEfKib6f2rvKdObplVpOpm9fhRHNUegHG2gLY
   </data>
  </layer>
- <layer name="box_layer" width="20" height="15">
+ <layer name="box_layer" width="20" height="15" visible="0">
   <data encoding="base64" compression="zlib">
    eJxjYBgFQwFwQ/FQsYPWbh0FIxMAAJroADg=
   </data>
  </layer>
- <layer name="dest_layer" width="20" height="15">
+ <layer name="dest_layer" width="20" height="15" visible="0">
   <data encoding="base64" compression="zlib">
    eJxjYBgF9ARcg8z+gXYPsWCouJMaYCT5lVQAAHr4ADM=
   </data>

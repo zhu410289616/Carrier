@@ -29,6 +29,7 @@ typedef enum {
     MoveCheckCodeMoveMan = 1,
     MoveCheckCodeCheckBox = 2,
     MoveCheckCodeMoveManAndBox = 3,
+    MoveCheckCodeMoveBox2Balloon = 4,
     MoveCheckCodeUnknow
 } MoveCheckCode;
 

@@ -55,7 +55,6 @@ CCPoint Man::positionWithDirection(MoveDirection direction)
 
 void Man::setFaceDirection(MoveDirection faceDirection)
 {
-    CCLOG("Man::setFaceDirection: %d", faceDirection);
     std::string fileName = "boxman_down@2x.png";
     switch (faceDirection) {
         case MoveDirectionUp:
@@ -82,7 +81,6 @@ void Man::setFaceDirection(MoveDirection faceDirection)
         default:
             break;
     }
-    CCLog("fileName: %s", fileName.c_str());
     CCSprite *sprite = CCSprite::create(fileName.c_str());
     this->setTexture(sprite->getTexture());
     this->direction = faceDirection;

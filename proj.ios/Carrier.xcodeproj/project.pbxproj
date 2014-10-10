@@ -154,6 +154,7 @@
 		16C2B2C019E7806B008AE9A4 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C2B2BE19E7806B008AE9A4 /* background.png */; };
 		16C2B2C119E7806B008AE9A4 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C2B2BF19E7806B008AE9A4 /* background@2x.png */; };
 		16C2B2C519E78DD8008AE9A4 /* SettingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16C2B2C319E78DD8008AE9A4 /* SettingScene.cpp */; };
+		16C2B2CB19E7DB8F008AE9A4 /* Balloon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16C2B2C919E7DB8F008AE9A4 /* Balloon.cpp */; };
 		16D9C3FA19C4964700FA26B6 /* balloon.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D9C3D919C4964700FA26B6 /* balloon.png */; };
 		16D9C3FB19C4964700FA26B6 /* balloon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D9C3DA19C4964700FA26B6 /* balloon@2x.png */; };
 		16D9C3FC19C4964700FA26B6 /* box.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D9C3DB19C4964700FA26B6 /* box.png */; };
@@ -605,6 +606,8 @@
 		16C2B2BF19E7806B008AE9A4 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
 		16C2B2C319E78DD8008AE9A4 /* SettingScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SettingScene.cpp; path = ../Classes/SettingScene.cpp; sourceTree = "<group>"; };
 		16C2B2C419E78DD8008AE9A4 /* SettingScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingScene.h; path = ../Classes/SettingScene.h; sourceTree = "<group>"; };
+		16C2B2C919E7DB8F008AE9A4 /* Balloon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Balloon.cpp; path = ../Classes/Balloon.cpp; sourceTree = "<group>"; };
+		16C2B2CA19E7DB8F008AE9A4 /* Balloon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Balloon.h; path = ../Classes/Balloon.h; sourceTree = "<group>"; };
 		16D9C3D919C4964700FA26B6 /* balloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = balloon.png; sourceTree = "<group>"; };
 		16D9C3DA19C4964700FA26B6 /* balloon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "balloon@2x.png"; sourceTree = "<group>"; };
 		16D9C3DB19C4964700FA26B6 /* box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = box.png; sourceTree = "<group>"; };
@@ -1410,6 +1413,8 @@
 				16F5419A19E6BA8400EF01A1 /* MenuScene.h */,
 				16C2B2C319E78DD8008AE9A4 /* SettingScene.cpp */,
 				16C2B2C419E78DD8008AE9A4 /* SettingScene.h */,
+				16C2B2C919E7DB8F008AE9A4 /* Balloon.cpp */,
+				16C2B2CA19E7DB8F008AE9A4 /* Balloon.h */,
 			);
 			name = Classes;
 			path = ../classes;
@@ -2166,6 +2171,7 @@
 				16D9C42A19C4974B00FA26B6 /* Box.cpp in Sources */,
 				15A3D9AB1682F7F9002FB0C5 /* cpSpace.c in Sources */,
 				15A3D9AC1682F7F9002FB0C5 /* cpSpaceComponent.c in Sources */,
+				16C2B2CB19E7DB8F008AE9A4 /* Balloon.cpp in Sources */,
 				15A3D9AD1682F7F9002FB0C5 /* cpSpaceHash.c in Sources */,
 				15A3D9AE1682F7F9002FB0C5 /* cpSpaceQuery.c in Sources */,
 				15A3D9AF1682F7F9002FB0C5 /* cpSpaceStep.c in Sources */,

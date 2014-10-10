@@ -13,6 +13,7 @@ bool Box::init()
     if (!CCSprite::initWithFile("box@2x.png")) {
         return false;
     }
+    this->setScale(0.9);
     return true;
 }
 

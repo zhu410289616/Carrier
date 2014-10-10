@@ -36,6 +36,7 @@ protected:
     MoveCheckCode shouldMoveOfManWithPosition(CCPoint nextPosition);
     MoveCheckCode shouldMoveOfBoxWithPosition(CCPoint nextPosition);
     
+    bool isTaskDone();
     void taskFinished();
     
 public:

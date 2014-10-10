@@ -13,7 +13,7 @@
 #include "Level.h"
 #include "Man.h"
 #include "Box.h"
-#include "GameConstants.h"
+#include "Balloon.h"
 
 USING_NS_CC;
 
@@ -35,8 +35,8 @@ protected:
     
 public:
     virtual bool initWithLevel(Level *level);
-    void initBox();
     void initBalloon();
+    void initBox();
     static MapLayer *create(Level *level);
     
     MapLayer();
@@ -56,7 +56,8 @@ public:
     
     //获取某个触摸点的box,如果不存在则返回null
     Box *boxWithPosition(CCPoint position);
-    
+    //获取某个触摸点的balloon,用于更新是否已经有box存在
+    Balloon *balloonWithPosition(CCPoint position);
 };
 
 #endif /* defined(__Map__MapLayer__) */

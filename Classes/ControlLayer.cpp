@@ -56,9 +56,35 @@ void ControlLayer::doMoveLogic(cocos2d::CCPoint beginPoint, cocos2d::CCPoint end
         } else if (MoveCheckCodeMoveMan == checkCode) {
             this->man->move(direction);
         } else if (MoveCheckCodeMoveManAndBox == checkCode) {
-            //todo
+            //todo 移动box，man
             //移动箱子，并调整原有元素位置
+            CCPoint nextPosition = this->nextPositionWithDirection(direction, man->getPosition());
+            //box被移走，重置balloon的状态
+            Balloon *balloon = mapLayer->balloonWithPosition(nextPosition);
+            if (balloon) {
+                balloon->setExistBox(false);
+            }
+            Box *box = mapLayer->boxWithPosition(nextPosition);
+            box->move(direction);
             this->man->move(direction);
+        } else if (MoveCheckCodeMoveBox2Balloon == checkCode) {
+            //
+            CCPoint nextPosition = this->nextPositionWithDirection(direction, man->getPosition());
+            CCPoint nextNextPosition = this->nextPositionWithDirection(direction, nextPosition);
+            //box被移走，重置balloon的状态
+            Balloon *balloon = mapLayer->balloonWithPosition(nextPosition);
+            if (balloon) {
+                balloon->setExistBox(false);
+            }
+            balloon = mapLayer->balloonWithPosition(nextNextPosition);
+            balloon->setExistBox(true);
+            Box *box = mapLayer->boxWithPosition(nextPosition);
+            box->move(direction);
+            this->man->move(direction);
+            //todo 使用action，移动完成后检测是否通关
+            if (this->isTaskDone()) {
+                this->taskFinished();
+            }
         }
     }//if
 }
@@ -151,7 +177,7 @@ MoveCheckCode ControlLayer::shouldMoveOfManWithPosition(cocos2d::CCPoint nextPos
     
     //1.先检测red wall碰撞
     int redWallTileId = mapLayer->tileIdOfRedWallWithPosition(nextPosition);
-    CCLOG("nextPosition.x: %f, nextPosition.y: %f, redWallTileId: %d", nextPosition.x, nextPosition.y, redWallTileId);
+    CCLOG("shouldMoveOfManWithPosition nextPosition: (%f, %f), redWallTileId: %d", nextPosition.x, nextPosition.y, redWallTileId);
     
     if (redWallTileId > 0) {
         return MoveCheckCodeNone;
@@ -169,6 +195,7 @@ MoveCheckCode ControlLayer::shouldMoveOfManWithPosition(cocos2d::CCPoint nextPos
         }
     }
     
+    CCLog("shouldMoveOfManWithPosition checkCode: %u", checkCode);
     return checkCode;
 }
 
@@ -178,7 +205,7 @@ MoveCheckCode ControlLayer::shouldMoveOfBoxWithPosition(cocos2d::CCPoint nextPos
     
     //1.先检测red wall碰撞
     int redWallTileId = mapLayer->tileIdOfRedWallWithPosition(nextPosition);
-    CCLOG("nextPosition.x: %f, nextPosition.y: %f, redWallTileId: %d", nextPosition.x, nextPosition.y, redWallTileId);
+    CCLOG("shouldMoveOfBoxWithPosition nextPosition: (%f, %f), redWallTileId: %d", nextPosition.x, nextPosition.y, redWallTileId);
     
     if (redWallTileId > 0) {
         return MoveCheckCodeNone;
@@ -191,13 +218,39 @@ MoveCheckCode ControlLayer::shouldMoveOfBoxWithPosition(cocos2d::CCPoint nextPos
         if (NULL == checkBox) {
             checkCode = MoveCheckCodeMoveManAndBox;
         }
+        Balloon *checkBalloon = mapLayer->balloonWithPosition(nextPosition);
+        if (NULL == checkBalloon) {
+            //非泡泡
+        } else {
+            //移动box到balloon的位置
+            checkCode = MoveCheckCodeMoveBox2Balloon;
+        }
     }
     
+    CCLog("shouldMoveOfBoxWithPosition checkCode: %u", checkCode);
     return checkCode;
+}
+
+bool ControlLayer::isTaskDone()
+{
+    bool isFinished = true;
+    
+    CCObject *object;
+    CCARRAY_FOREACH(mapLayer->balloons, object) {
+        Balloon *balloonObject = (Balloon *)object;
+        if (!balloonObject->isExistBox()) {
+            isFinished = false;
+            break;
+        }
+    }
+    
+    return isFinished;
 }
 
 void ControlLayer::taskFinished()
 {
+    CCLog("ControlLayer::taskFinished...");
+    
     /**
      *  通关，检测下一个关卡，并刷新地图
      */

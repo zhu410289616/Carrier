@@ -37,9 +37,39 @@ bool MapLayer::initWithLevel(Level *level)
     destLayer = gameMap->layerNamed("desc_layer");
     
     //
+    this->initBalloon();
     this->initBox();
     
     return true;
+}
+
+void MapLayer::initBalloon()
+{
+    //todo
+    CCPoint point;
+    Balloon *balloon = NULL;
+    
+    point = this->positionWithTileCoordinate(ccp(8, 6));
+    balloon = Balloon::create();
+    balloon->setPosition(point);
+    this->balloons->addObject(balloon);
+    
+    point = this->positionWithTileCoordinate(ccp(9, 10));
+    balloon = Balloon::create();
+    balloon->setPosition(point);
+    this->balloons->addObject(balloon);
+    
+    point = this->positionWithTileCoordinate(ccp(11, 8));
+    balloon = Balloon::create();
+    balloon->setPosition(point);
+    this->balloons->addObject(balloon);
+    
+    CCObject *object;
+    CCARRAY_FOREACH(balloons, object) {
+        Balloon *balloonObject = (Balloon *)object;
+        balloonObject->setAnchorPoint(ccp(0, 0));
+        this->addChild(balloonObject, 1);
+    }
 }
 
 void MapLayer::initBox()
@@ -48,36 +78,31 @@ void MapLayer::initBox()
     CCDictionary *object1 = objects->objectNamed("object_test1");
     CCLog("object1 x: %s", object1->valueForKey("x")->getCString());
     
+    //test logic
     CCPoint point;
     Box *box = NULL;
     
     point = this->positionWithTileCoordinate(ccp(5, 7));
     box = Box::create();
-    box->setPosition(point);
+    box->setPosition(ccp(point.x + 2, point.y + 2));
     this->boxes->addObject(box);
     
     point = this->positionWithTileCoordinate(ccp(8, 10));
     box = Box::create();
-    box->setPosition(point);
+    box->setPosition(ccp(point.x + 2, point.y + 2));
     this->boxes->addObject(box);
     
     point = this->positionWithTileCoordinate(ccp(10, 10));
     box = Box::create();
-    box->setPosition(point);
+    box->setPosition(ccp(point.x + 2, point.y + 2));
     this->boxes->addObject(box);
     
     CCObject *object;
     CCARRAY_FOREACH(boxes, object) {
-        Box *tempBox = (Box *)object;
-        tempBox->setAnchorPoint(ccp(0, 0));
-        this->addChild(tempBox, 2);
+        Box *boxObject = (Box *)object;
+        boxObject->setAnchorPoint(ccp(0, 0));
+        this->addChild(boxObject, 2);
     }
-    
-}
-
-void MapLayer::initBalloon()
-{
-    //todo
 }
 
 MapLayer::MapLayer()
@@ -196,11 +221,39 @@ Box *MapLayer::boxWithPosition(cocos2d::CCPoint position)
     CCARRAY_FOREACH(this->boxes, object) {
         Box *boxObject = (Box *)object;
         CCPoint boxCoordinate = this->tileCoordinateWithPosition(boxObject->getPosition());
-        CCLOG("tileCoordinate(%f, %f), boxCoordinate(%f, %f)", tileCoordinate.x, tileCoordinate.y, boxCoordinate.x, boxCoordinate.y);
+//        CCLOG("tileCoordinate(%f, %f), boxCoordinate(%f, %f)", tileCoordinate.x, tileCoordinate.y, boxCoordinate.x, boxCoordinate.y);
         if (tileCoordinate.equals(boxCoordinate)) {
             box = boxObject;
             break;
         }
     }
+    if (box) {
+        CCLog("boxWithPosition: (box != NULL)");
+    } else {
+        CCLog("boxWithPosition: (box == NULL)");
+    }
     return box;
+}
+
+//
+Balloon *MapLayer::balloonWithPosition(cocos2d::CCPoint position)
+{
+    Balloon *balloon = NULL;
+    CCPoint tileCoordinate = this->tileCoordinateWithPosition(position);
+    
+    CCObject *object;
+    CCARRAY_FOREACH(balloons, object) {
+        Balloon *balloonObject = (Balloon *)object;
+        CCPoint balloonCoordinate = this->tileCoordinateWithPosition(balloonObject->getPosition());
+        if (tileCoordinate.equals(balloonCoordinate)) {
+            balloon = balloonObject;
+            break;
+        }
+    }
+    if (balloon) {
+        CCLog("balloonWithPosition: (balloon != NULL)");
+    } else {
+        CCLog("balloonWithPosition: (balloon == NULL)");
+    }
+    return balloon;
 }
