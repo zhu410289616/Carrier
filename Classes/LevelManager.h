@@ -14,11 +14,14 @@
 
 class LevelManager : public cocos2d::CCObject {
 private:
+    Level *mCurrentLevel;
     
 public:
-    Level *currentLevel;
+    static LevelManager *sharedInstance();
     
-public:
+    LevelManager();
+    ~LevelManager();
+    
     virtual bool init();
     CREATE_FUNC(LevelManager);
     
@@ -29,8 +32,6 @@ public:
     bool shouldGotoNextLevel();
     Level *prevLevel();
     Level *nextLevel();
-    
-    static LevelManager *sharedInstance();
 };
 
 #endif /* defined(__Map__LevelManager__) */

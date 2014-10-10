@@ -59,7 +59,8 @@ void MenuScene::didLevelSelected(Level *level)
 {
     CCLog("MenuScene::didLevelSelected: %d", level->number);
     
-    CCDirector::sharedDirector()->replaceScene(GameScene::scene());
+    CCDirector::sharedDirector()->replaceScene(GameScene::scene(level));
+//    CCDirector::sharedDirector()->pushScene(GameScene::scene());
 }
 
 void MenuScene::menuSettingCallback(cocos2d::CCObject *pSender)
@@ -67,4 +68,5 @@ void MenuScene::menuSettingCallback(cocos2d::CCObject *pSender)
     CCLog("MenuScene::menuSettingCallback...");
     
     CCDirector::sharedDirector()->replaceScene(SettingScene::scene());
+    CCDirector::sharedDirector()->pushScene(SettingScene::scene());
 }

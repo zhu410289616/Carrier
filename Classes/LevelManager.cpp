@@ -20,6 +20,16 @@ LevelManager *LevelManager::sharedInstance()
     return instance;
 }
 
+LevelManager::LevelManager()
+{
+    mCurrentLevel = NULL;
+}
+
+LevelManager::~LevelManager()
+{
+//    CC_SAFE_RELEASE_NULL(mCurrentLevel);
+}
+
 bool LevelManager::init()
 {
     //从缓存中读取历史关卡
@@ -27,22 +37,23 @@ bool LevelManager::init()
     defaultLevel = CCUserDefault::sharedUserDefault()->getIntegerForKey(kLevelNumberKey, defaultLevel);
     
     //
-    currentLevel = Level::create(defaultLevel);
+    mCurrentLevel = Level::create(defaultLevel);
+//    mCurrentLevel->retain();
     
     return true;
 }
 
 void LevelManager::setCurrentLevel(unsigned int levelNumber)
 {
-    currentLevel = Level::create(levelNumber);
-    currentLevel->mapName = CCString::createWithFormat("map_%d.tmx", levelNumber);
+    mCurrentLevel = Level::create(levelNumber);
+//    mCurrentLevel->retain();
     
     CCUserDefault::sharedUserDefault()->setIntegerForKey(kLevelNumberKey, levelNumber);
 }
 
 Level *LevelManager::getCurrentLevel()
 {
-    return currentLevel;
+    return mCurrentLevel;
 }
 
 bool LevelManager::shouldGotoPrevLevel()
@@ -57,10 +68,10 @@ bool LevelManager::shouldGotoNextLevel()
 
 Level *LevelManager::prevLevel()
 {
-    return currentLevel;
+    return mCurrentLevel;
 }
 
 Level *LevelManager::nextLevel()
 {
-    return currentLevel;
+    return mCurrentLevel;
 }

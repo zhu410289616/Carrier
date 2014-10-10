@@ -24,10 +24,8 @@ public:
     CCString *finishEffect;
     
 public:
-    virtual bool init();
     virtual bool initWithLevelNumber(unsigned int levelNumber);
     virtual bool initWithDictionary(CCDictionary *dict);
-    CREATE_FUNC(Level);
     static Level *create(unsigned int levelNumber);
     static Level *create(CCDictionary *dict);
 };

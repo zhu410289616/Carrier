@@ -39,7 +39,8 @@ void LevelLayer::tableCellTouched(cocos2d::extension::CCTableView *table, cocos2
     CCLOG("cell touched at index: %i", cell->getIdx());
     
     if (mDelegate) {
-        Level *level = Level::create(cell->getIdx());
+//        Level *level = Level::create(cell->getIdx());
+        Level *level = Level::create(1);
         mDelegate->didLevelSelected(level);
     }
 }

@@ -30,11 +30,6 @@ Level *Level::create(cocos2d::CCDictionary *dict)
     return NULL;
 }
 
-bool Level::init()
-{
-    return true;
-}
-
 bool Level::initWithLevelNumber(unsigned int levelNumber)
 {
     number = levelNumber;
