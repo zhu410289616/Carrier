@@ -84,10 +84,11 @@ bool GameScene::init()
     this->addChild(mMapLayer);
     
     //初始化搬运工
+    CCPoint adjustPoint = ccp(2, 2);
     Man *man = Man::create();//todo
     man->setScale(0.6);
     CCPoint point = mMapLayer->positionWithTileCoordinate(ccp(5, 7));
-    man->setPosition(ccp(point.x + 2, point.y + 2));
+    man->setPosition(ccpAdd(point, adjustPoint));
     man->setAnchorPoint(ccp(0, 0));
     mMapLayer->addChild(man, 9);
     
@@ -124,16 +125,18 @@ bool GameScene::initWithLevel(Level *pLevel)
     this->addChild(mMapLayer);
     
     //初始化搬运工
+    CCPoint adjustPoint = ccp(2, 2);
     Man *man = Man::create();//todo
     man->setScale(0.6);
-    CCPoint point = mMapLayer->positionWithTileCoordinate(ccp(5, 7));
-    man->setPosition(ccp(point.x + 2, point.y + 2));
+    CCPoint point = mMapLayer->positionWithTileCoordinate(ccp(4, 7));
+    man->setPosition(ccpAdd(point, adjustPoint));
     man->setAnchorPoint(ccp(0, 0));
     mMapLayer->addChild(man, 9);
     
     //控制层
     mControlLayer = ControlLayer::create();
     mControlLayer->setPosition(origin.x, origin.y);
+    mControlLayer->setDelegate(this);
     mControlLayer->mapLayer = mMapLayer;
     mControlLayer->man = man;
     this->addChild(mControlLayer);
@@ -147,6 +150,21 @@ bool GameScene::initWithLevel(Level *pLevel)
     this->addChild(pMenu, 1);
     
     return true;
+}
+
+//ControlLayerDelegate
+void GameScene::didTaskFinished()
+{
+    /**
+     *  通关，检测下一个关卡，并刷新地图
+     */
+    LevelManager *levelManager = LevelManager::sharedInstance();
+    if (levelManager->shouldGotoNextLevel()) {
+        Level *nextLevel = levelManager->nextLevel();
+        CCDirector::sharedDirector()->replaceScene(GameScene::scene(nextLevel));
+    } else {
+        //todo
+    }
 }
 
 void GameScene::menuBackCallback(cocos2d::CCObject *pSender)

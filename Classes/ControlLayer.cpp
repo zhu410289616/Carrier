@@ -7,6 +7,7 @@
 //
 
 #include "ControlLayer.h"
+#include "LevelManager.h"
 
 bool ControlLayer::init()
 {
@@ -19,28 +20,33 @@ bool ControlLayer::init()
     return true;
 }
 
+void ControlLayer::setDelegate(ControlLayerDelegate *delegate)
+{
+    this->mDelegate = delegate;
+}
+
 #pragma mark CCTouchDelegate method
 
 void ControlLayer::ccTouchesBegan(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent)
 {
     CCTouch *touch = (CCTouch *)pTouches->anyObject();
     CCPoint nodePoint = convertTouchToNodeSpace(touch);
-    this->beginPoint = nodePoint;
+    this->mBeginPoint = nodePoint;
 }
 
 void ControlLayer::ccTouchesEnded(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent)
 {
     CCTouch *touch = (CCTouch *)pTouches->anyObject();
     CCPoint nodePoint = convertTouchToNodeSpace(touch);
-    this->endPoint = nodePoint;
+    this->mEndPoint = nodePoint;
     
-    this->doMoveLogic(this->beginPoint, this->endPoint);
+    this->doMoveLogic(this->mBeginPoint, this->mEndPoint);
 }
 
 void ControlLayer::ccTouchesCancelled(cocos2d::CCSet *pTouches, cocos2d::CCEvent *pEvent)
 {
-    this->beginPoint = CCPointZero;
-    this->endPoint = CCPointZero;
+    this->mBeginPoint = CCPointZero;
+    this->mEndPoint = CCPointZero;
 }
 
 #pragma mark do move logic
@@ -217,13 +223,14 @@ MoveCheckCode ControlLayer::shouldMoveOfBoxWithPosition(cocos2d::CCPoint nextPos
         Box *checkBox = mapLayer->boxWithPosition(nextPosition);
         if (NULL == checkBox) {
             checkCode = MoveCheckCodeMoveManAndBox;
-        }
-        Balloon *checkBalloon = mapLayer->balloonWithPosition(nextPosition);
-        if (NULL == checkBalloon) {
-            //非泡泡
-        } else {
-            //移动box到balloon的位置
-            checkCode = MoveCheckCodeMoveBox2Balloon;
+            //如果不是box，继续检测是否是balloon
+            Balloon *checkBalloon = mapLayer->balloonWithPosition(nextPosition);
+            if (NULL == checkBalloon) {
+                //非泡泡
+            } else {
+                //移动box到balloon的位置
+                checkCode = MoveCheckCodeMoveBox2Balloon;
+            }
         }
     }
     
@@ -251,8 +258,7 @@ void ControlLayer::taskFinished()
 {
     CCLog("ControlLayer::taskFinished...");
     
-    /**
-     *  通关，检测下一个关卡，并刷新地图
-     */
-//    Level *nextLevel = LevelManager::create();
+    if (this->mDelegate) {
+        this->mDelegate->didTaskFinished();
+    }
 }

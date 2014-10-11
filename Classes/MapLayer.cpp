@@ -48,20 +48,21 @@ void MapLayer::initBalloon()
     //todo
     CCPoint point;
     Balloon *balloon = NULL;
+    CCPoint adjustPoint = ccp(2, 2);
     
     point = this->positionWithTileCoordinate(ccp(8, 6));
     balloon = Balloon::create();
-    balloon->setPosition(point);
+    balloon->setPosition(ccpAdd(point, adjustPoint));
     this->balloons->addObject(balloon);
     
     point = this->positionWithTileCoordinate(ccp(9, 10));
     balloon = Balloon::create();
-    balloon->setPosition(point);
+    balloon->setPosition(ccpAdd(point, adjustPoint));
     this->balloons->addObject(balloon);
     
     point = this->positionWithTileCoordinate(ccp(11, 8));
     balloon = Balloon::create();
-    balloon->setPosition(point);
+    balloon->setPosition(ccpAdd(point, adjustPoint));
     this->balloons->addObject(balloon);
     
     CCObject *object;
@@ -81,20 +82,21 @@ void MapLayer::initBox()
     //test logic
     CCPoint point;
     Box *box = NULL;
+    CCPoint adjustPoint = ccp(2, 2);
     
     point = this->positionWithTileCoordinate(ccp(5, 7));
     box = Box::create();
-    box->setPosition(ccp(point.x + 2, point.y + 2));
+    box->setPosition(ccpAdd(point, adjustPoint));
     this->boxes->addObject(box);
     
     point = this->positionWithTileCoordinate(ccp(8, 10));
     box = Box::create();
-    box->setPosition(ccp(point.x + 2, point.y + 2));
+    box->setPosition(ccpAdd(point, adjustPoint));
     this->boxes->addObject(box);
     
     point = this->positionWithTileCoordinate(ccp(10, 10));
     box = Box::create();
-    box->setPosition(ccp(point.x + 2, point.y + 2));
+    box->setPosition(ccpAdd(point, adjustPoint));
     this->boxes->addObject(box);
     
     CCObject *object;

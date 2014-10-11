@@ -68,10 +68,14 @@ bool LevelManager::shouldGotoNextLevel()
 
 Level *LevelManager::prevLevel()
 {
+    int levelNumber = CCUserDefault::sharedUserDefault()->getIntegerForKey(kLevelNumberKey, 1);
+    mCurrentLevel = Level::create(levelNumber);
     return mCurrentLevel;
 }
 
 Level *LevelManager::nextLevel()
 {
+    int levelNumber = CCUserDefault::sharedUserDefault()->getIntegerForKey(kLevelNumberKey, 1);
+    mCurrentLevel = Level::create(levelNumber);
     return mCurrentLevel;
 }

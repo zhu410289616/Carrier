@@ -12,7 +12,7 @@
 #include "cocos2d.h"
 #include "ControlLayer.h"
 
-class GameScene : public cocos2d::CCLayer {
+class GameScene : public cocos2d::CCLayer, public ControlLayerDelegate {
 private:
     MapLayer *mMapLayer;
     ControlLayer *mControlLayer;
@@ -29,6 +29,9 @@ public:
     virtual bool initWithLevel(Level *pLevel);
     CREATE_FUNC(GameScene);
     static GameScene *create(Level *pLevel);
+    
+    //ControlLayerDelegate
+    virtual void didTaskFinished();
     
     //back callback
     void menuBackCallback(CCObject *pSender);

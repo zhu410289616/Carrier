@@ -16,14 +16,30 @@
 
 USING_NS_CC;
 
+class ControlLayerDelegate {
+    
+public:
+    virtual void didTaskFinished() = 0;
+};
+
 class ControlLayer : public cocos2d::CCLayer {
 private:
-    CCPoint beginPoint;
-    CCPoint endPoint;
+    CCPoint mBeginPoint;
+    CCPoint mEndPoint;
+    
+    ControlLayerDelegate *mDelegate;
+    
+public:
+    MapLayer *mapLayer;
+    Man *man;
+    
+public:
+    virtual bool init();
+    CREATE_FUNC(ControlLayer);
+    
+    void setDelegate(ControlLayerDelegate *delegate);
     
 protected:
-    void reloadMap();
-    
     //CCTouchDelegate
     void ccTouchesBegan(CCSet *pTouches, CCEvent *pEvent);
     void ccTouchesEnded(CCSet *pTouches, CCEvent *pEvent);
@@ -38,14 +54,6 @@ protected:
     
     bool isTaskDone();
     void taskFinished();
-    
-public:
-    MapLayer *mapLayer;
-    Man *man;
-    
-public:
-    virtual bool init();
-    CREATE_FUNC(ControlLayer);
 };
 
 #endif /* defined(__Map__ControlLayer__) */
