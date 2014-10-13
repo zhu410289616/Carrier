@@ -155,6 +155,7 @@
 		16C2B2C119E7806B008AE9A4 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C2B2BF19E7806B008AE9A4 /* background@2x.png */; };
 		16C2B2C519E78DD8008AE9A4 /* SettingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16C2B2C319E78DD8008AE9A4 /* SettingScene.cpp */; };
 		16C2B2CB19E7DB8F008AE9A4 /* Balloon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16C2B2C919E7DB8F008AE9A4 /* Balloon.cpp */; };
+		16CB47AE19EBB23F00A25487 /* FFHttpClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16CB47AC19EBB23F00A25487 /* FFHttpClient.cpp */; };
 		16D9C3FA19C4964700FA26B6 /* balloon.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D9C3D919C4964700FA26B6 /* balloon.png */; };
 		16D9C3FB19C4964700FA26B6 /* balloon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D9C3DA19C4964700FA26B6 /* balloon@2x.png */; };
 		16D9C3FC19C4964700FA26B6 /* box.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D9C3DB19C4964700FA26B6 /* box.png */; };
@@ -608,6 +609,8 @@
 		16C2B2C419E78DD8008AE9A4 /* SettingScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingScene.h; path = ../Classes/SettingScene.h; sourceTree = "<group>"; };
 		16C2B2C919E7DB8F008AE9A4 /* Balloon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Balloon.cpp; path = ../Classes/Balloon.cpp; sourceTree = "<group>"; };
 		16C2B2CA19E7DB8F008AE9A4 /* Balloon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Balloon.h; path = ../Classes/Balloon.h; sourceTree = "<group>"; };
+		16CB47AC19EBB23F00A25487 /* FFHttpClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FFHttpClient.cpp; sourceTree = "<group>"; };
+		16CB47AD19EBB23F00A25487 /* FFHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFHttpClient.h; sourceTree = "<group>"; };
 		16D9C3D919C4964700FA26B6 /* balloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = balloon.png; sourceTree = "<group>"; };
 		16D9C3DA19C4964700FA26B6 /* balloon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "balloon@2x.png"; sourceTree = "<group>"; };
 		16D9C3DB19C4964700FA26B6 /* box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = box.png; sourceTree = "<group>"; };
@@ -1388,6 +1391,7 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				16CB47AB19EBB22900A25487 /* FFHttp */,
 				16D9C41B19C4974B00FA26B6 /* Box.cpp */,
 				16D9C41C19C4974B00FA26B6 /* Box.h */,
 				16D9C41D19C4974B00FA26B6 /* ControlLayer.cpp */,
@@ -1443,6 +1447,16 @@
 				16771CA019E0DCDC0037B458 /* man_baby_up@2x.png */,
 			);
 			path = man;
+			sourceTree = "<group>";
+		};
+		16CB47AB19EBB22900A25487 /* FFHttp */ = {
+			isa = PBXGroup;
+			children = (
+				16CB47AC19EBB23F00A25487 /* FFHttpClient.cpp */,
+				16CB47AD19EBB23F00A25487 /* FFHttpClient.h */,
+			);
+			name = FFHttp;
+			path = ../Classes/FFHttp;
 			sourceTree = "<group>";
 		};
 		16D9C3D819C4964700FA26B6 /* images */ = {
@@ -2277,6 +2291,7 @@
 				379BB99F17F03F3700829B88 /* CCDatas.cpp in Sources */,
 				379BB9A017F03F3700829B88 /* CCBatchNode.cpp in Sources */,
 				379BB9A117F03F3700829B88 /* CCDecorativeDisplay.cpp in Sources */,
+				16CB47AE19EBB23F00A25487 /* FFHttpClient.cpp in Sources */,
 				379BB9A217F03F3700829B88 /* CCDisplayFactory.cpp in Sources */,
 				379BB9A317F03F3700829B88 /* CCDisplayManager.cpp in Sources */,
 				379BB9A417F03F3700829B88 /* CCSkin.cpp in Sources */,

@@ -10,6 +10,9 @@
 #include "GameScene.h"
 #include "SettingScene.h"
 
+//test
+#include "FFHttpClient.h"
+
 CCScene *MenuScene::scene()
 {
     CCScene *scene = CCScene::create();
@@ -50,6 +53,10 @@ bool MenuScene::init()
     CCMenu *pMenu = CCMenu::create(pSettingItem, NULL);
     pMenu->setPosition(CCPointZero);
     this->addChild(pMenu, 1);
+    
+    //test
+    FFHttpClient *httpClient = FFHttpClient::create();
+//    httpClient->didSendRequest();
     
     return true;
 }
