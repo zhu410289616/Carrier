@@ -16,7 +16,7 @@ USING_NS_CC;
 
 class Man : public cocos2d::CCSprite {
 private:
-    MoveDirection direction;
+    MoveDirection mDirection;
     
 public:
     virtual bool init();

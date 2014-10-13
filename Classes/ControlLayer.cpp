@@ -20,6 +20,16 @@ bool ControlLayer::init()
     return true;
 }
 
+void ControlLayer::setMapLayer(MapLayer *mapLayer)
+{
+    this->mMapLayer = mapLayer;
+}
+
+void ControlLayer::setMan(Man *man)
+{
+    this->mMan = man;
+}
+
 void ControlLayer::setDelegate(ControlLayerDelegate *delegate)
 {
     this->mDelegate = delegate;
@@ -58,37 +68,37 @@ void ControlLayer::doMoveLogic(cocos2d::CCPoint beginPoint, cocos2d::CCPoint end
         //检测某个方向能否移动
         MoveCheckCode checkCode = this->shouldMoveWithDirection(direction);
         if (MoveCheckCodeNone == checkCode) {
-            this->man->setFaceDirection(direction);
+            this->mMan->setFaceDirection(direction);
         } else if (MoveCheckCodeMoveMan == checkCode) {
-            this->man->move(direction);
+            this->mMan->move(direction);
         } else if (MoveCheckCodeMoveManAndBox == checkCode) {
             //todo 移动box，man
             //移动箱子，并调整原有元素位置
-            CCPoint nextPosition = this->nextPositionWithDirection(direction, man->getPosition());
+            CCPoint nextPosition = this->nextPositionWithDirection(direction, mMan->getPosition());
             //box被移走，重置balloon的状态
-            Balloon *balloon = mapLayer->balloonWithPosition(nextPosition);
+            Balloon *balloon = mMapLayer->balloonWithPosition(nextPosition);
             if (balloon) {
                 balloon->setExistBox(false);
             }
-            Box *box = mapLayer->boxWithPosition(nextPosition);
+            Box *box = mMapLayer->boxWithPosition(nextPosition);
             box->move(direction);
-            this->man->move(direction);
+            this->mMan->move(direction);
         } else if (MoveCheckCodeMoveBox2Balloon == checkCode) {
             //
-            CCPoint nextPosition = this->nextPositionWithDirection(direction, man->getPosition());
+            CCPoint nextPosition = this->nextPositionWithDirection(direction, mMan->getPosition());
             CCPoint nextNextPosition = this->nextPositionWithDirection(direction, nextPosition);
             //box被移走，重置balloon的状态
-            Balloon *balloon = mapLayer->balloonWithPosition(nextPosition);
+            Balloon *balloon = mMapLayer->balloonWithPosition(nextPosition);
             if (balloon) {
                 balloon->setExistBox(false);
             }
-            balloon = mapLayer->balloonWithPosition(nextNextPosition);
+            balloon = mMapLayer->balloonWithPosition(nextNextPosition);
             balloon->setExistBox(true);
-            Box *box = mapLayer->boxWithPosition(nextPosition);
+            Box *box = mMapLayer->boxWithPosition(nextPosition);
             box->move(direction);
-            this->man->move(direction);
+            this->mMan->move(direction);
             //todo 使用action，移动完成后检测是否通关
-            if (this->isTaskDone()) {
+            if (mMapLayer->isTaskDoneStatus()) {
                 this->taskFinished();
             }
         }
@@ -155,7 +165,7 @@ CCPoint ControlLayer::nextPositionWithDirection(MoveDirection direction, cocos2d
 MoveCheckCode ControlLayer::shouldMoveWithDirection(MoveDirection direction)
 {
     MoveCheckCode checkCode = MoveCheckCodeNone;
-    CCPoint nextPosition = this->nextPositionWithDirection(direction, man->getPosition());
+    CCPoint nextPosition = this->nextPositionWithDirection(direction, mMan->getPosition());
     checkCode = this->shouldMoveOfManWithPosition(nextPosition);
     if (MoveCheckCodeMoveMan == checkCode) {
         //只移动man
@@ -182,7 +192,7 @@ MoveCheckCode ControlLayer::shouldMoveOfManWithPosition(cocos2d::CCPoint nextPos
     MoveCheckCode checkCode = MoveCheckCodeNone;
     
     //1.先检测red wall碰撞
-    int redWallTileId = mapLayer->tileIdOfRedWallWithPosition(nextPosition);
+    int redWallTileId = mMapLayer->tileIdOfRedWallWithPosition(nextPosition);
     CCLOG("shouldMoveOfManWithPosition nextPosition: (%f, %f), redWallTileId: %d", nextPosition.x, nextPosition.y, redWallTileId);
     
     if (redWallTileId > 0) {
@@ -191,7 +201,7 @@ MoveCheckCode ControlLayer::shouldMoveOfManWithPosition(cocos2d::CCPoint nextPos
     
     //2.检测box碰撞
     if (redWallTileId <= 0) {
-        Box *checkBox = mapLayer->boxWithPosition(nextPosition);
+        Box *checkBox = mMapLayer->boxWithPosition(nextPosition);
         if (NULL == checkBox) {
             //todo MoveCheckCodeMoveMan
             checkCode = MoveCheckCodeMoveMan;
@@ -210,7 +220,7 @@ MoveCheckCode ControlLayer::shouldMoveOfBoxWithPosition(cocos2d::CCPoint nextPos
     MoveCheckCode checkCode = MoveCheckCodeNone;
     
     //1.先检测red wall碰撞
-    int redWallTileId = mapLayer->tileIdOfRedWallWithPosition(nextPosition);
+    int redWallTileId = mMapLayer->tileIdOfRedWallWithPosition(nextPosition);
     CCLOG("shouldMoveOfBoxWithPosition nextPosition: (%f, %f), redWallTileId: %d", nextPosition.x, nextPosition.y, redWallTileId);
     
     if (redWallTileId > 0) {
@@ -220,11 +230,11 @@ MoveCheckCode ControlLayer::shouldMoveOfBoxWithPosition(cocos2d::CCPoint nextPos
     //2.检测box碰撞
     if (redWallTileId <= 0) {
         //todo MoveCheckCodeMoveManAndBox
-        Box *checkBox = mapLayer->boxWithPosition(nextPosition);
+        Box *checkBox = mMapLayer->boxWithPosition(nextPosition);
         if (NULL == checkBox) {
             checkCode = MoveCheckCodeMoveManAndBox;
             //如果不是box，继续检测是否是balloon
-            Balloon *checkBalloon = mapLayer->balloonWithPosition(nextPosition);
+            Balloon *checkBalloon = mMapLayer->balloonWithPosition(nextPosition);
             if (NULL == checkBalloon) {
                 //非泡泡
             } else {
@@ -236,22 +246,6 @@ MoveCheckCode ControlLayer::shouldMoveOfBoxWithPosition(cocos2d::CCPoint nextPos
     
     CCLog("shouldMoveOfBoxWithPosition checkCode: %u", checkCode);
     return checkCode;
-}
-
-bool ControlLayer::isTaskDone()
-{
-    bool isFinished = true;
-    
-    CCObject *object;
-    CCARRAY_FOREACH(mapLayer->balloons, object) {
-        Balloon *balloonObject = (Balloon *)object;
-        if (!balloonObject->isExistBox()) {
-            isFinished = false;
-            break;
-        }
-    }
-    
-    return isFinished;
 }
 
 void ControlLayer::taskFinished()

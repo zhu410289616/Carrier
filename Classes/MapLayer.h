@@ -27,9 +27,9 @@ private:
     
     CCTMXObjectGroup *objects;
     
-public:
-    CCArray *boxes;
-    CCArray *balloons;
+    //
+    CCArray *mBoxes;
+    CCArray *mBalloons;
     
 protected:
     
@@ -58,6 +58,8 @@ public:
     Box *boxWithPosition(CCPoint position);
     //获取某个触摸点的balloon,用于更新是否已经有box存在
     Balloon *balloonWithPosition(CCPoint position);
+    
+    bool isTaskDoneStatus();
 };
 
 #endif /* defined(__Map__MapLayer__) */

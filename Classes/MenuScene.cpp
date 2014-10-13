@@ -57,7 +57,7 @@ bool MenuScene::init()
 //LevelLayerDelegate
 void MenuScene::didLevelSelected(Level *level)
 {
-    CCLog("MenuScene::didLevelSelected: %d", level->number);
+    CCLog("MenuScene::didLevelSelected: %d", level->mNumber);
     
     CCDirector::sharedDirector()->replaceScene(GameScene::scene(level));
 //    CCDirector::sharedDirector()->pushScene(GameScene::scene());

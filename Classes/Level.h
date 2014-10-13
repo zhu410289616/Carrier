@@ -14,14 +14,12 @@
 USING_NS_CC;
 
 class Level : public cocos2d::CCObject {
-private:
-    
 public:
-    unsigned int number;
-    CCString *mapName;
-    CCString *backgroundMusic;
-    CCString *pushEffect;
-    CCString *finishEffect;
+    unsigned int mNumber;
+    CCString *mMapName;
+    CCString *mBackgroundMusic;
+    CCString *mPushEffect;
+    CCString *mFinishEffect;
     
 public:
     virtual bool initWithLevelNumber(unsigned int levelNumber);

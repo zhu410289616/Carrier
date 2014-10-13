@@ -13,9 +13,6 @@ bool Man::init()
     if (!CCSprite::initWithFile("boxman_down@2x.png")) {
         return false;
     }
-    
-//    this->set
-    
     return true;
 }
 
@@ -83,7 +80,7 @@ void Man::setFaceDirection(MoveDirection faceDirection)
     }
     CCSprite *sprite = CCSprite::create(fileName.c_str());
     this->setTexture(sprite->getTexture());
-    this->direction = faceDirection;
+    this->mDirection = faceDirection;
 }
 
 void Man::move(MoveDirection moveDirection)

@@ -26,8 +26,8 @@ bool MapLayer::initWithLevel(Level *level)
         return false;
     }
     
-    CCLOG("level->mapName: %s", level->mapName->getCString());
-    gameMap = CCTMXTiledMap::create(level->mapName->getCString());
+    CCLOG("level->mapName: %s", level->mMapName->getCString());
+    gameMap = CCTMXTiledMap::create(level->mMapName->getCString());
     gameMap->setPosition(0, 0);
     this->addChild(gameMap, 1);
     
@@ -53,20 +53,20 @@ void MapLayer::initBalloon()
     point = this->positionWithTileCoordinate(ccp(8, 6));
     balloon = Balloon::create();
     balloon->setPosition(ccpAdd(point, adjustPoint));
-    this->balloons->addObject(balloon);
+    this->mBalloons->addObject(balloon);
     
     point = this->positionWithTileCoordinate(ccp(9, 10));
     balloon = Balloon::create();
     balloon->setPosition(ccpAdd(point, adjustPoint));
-    this->balloons->addObject(balloon);
+    this->mBalloons->addObject(balloon);
     
     point = this->positionWithTileCoordinate(ccp(11, 8));
     balloon = Balloon::create();
     balloon->setPosition(ccpAdd(point, adjustPoint));
-    this->balloons->addObject(balloon);
+    this->mBalloons->addObject(balloon);
     
     CCObject *object;
-    CCARRAY_FOREACH(balloons, object) {
+    CCARRAY_FOREACH(mBalloons, object) {
         Balloon *balloonObject = (Balloon *)object;
         balloonObject->setAnchorPoint(ccp(0, 0));
         this->addChild(balloonObject, 1);
@@ -87,20 +87,20 @@ void MapLayer::initBox()
     point = this->positionWithTileCoordinate(ccp(5, 7));
     box = Box::create();
     box->setPosition(ccpAdd(point, adjustPoint));
-    this->boxes->addObject(box);
+    this->mBoxes->addObject(box);
     
     point = this->positionWithTileCoordinate(ccp(8, 10));
     box = Box::create();
     box->setPosition(ccpAdd(point, adjustPoint));
-    this->boxes->addObject(box);
+    this->mBoxes->addObject(box);
     
     point = this->positionWithTileCoordinate(ccp(10, 10));
     box = Box::create();
     box->setPosition(ccpAdd(point, adjustPoint));
-    this->boxes->addObject(box);
+    this->mBoxes->addObject(box);
     
     CCObject *object;
-    CCARRAY_FOREACH(boxes, object) {
+    CCARRAY_FOREACH(mBoxes, object) {
         Box *boxObject = (Box *)object;
         boxObject->setAnchorPoint(ccp(0, 0));
         this->addChild(boxObject, 2);
@@ -109,22 +109,22 @@ void MapLayer::initBox()
 
 MapLayer::MapLayer()
 {
-    boxes = CCArray::create();//autorelease，会被自动释放
-    boxes->retain();
+    mBoxes = CCArray::create();//autorelease，会被自动释放
+    mBoxes->retain();
     
-    balloons = CCArray::create();
-    balloons->retain();
+    mBalloons = CCArray::create();
+    mBalloons->retain();
 }
 
 MapLayer::~MapLayer()
 {
-    if (NULL != boxes) {
-        boxes->removeAllObjects();
-        CC_SAFE_RELEASE_NULL(boxes);
+    if (NULL != mBoxes) {
+        mBoxes->removeAllObjects();
+        CC_SAFE_RELEASE_NULL(mBoxes);
     }
-    if (NULL != balloons) {
-        balloons->removeAllObjects();
-        CC_SAFE_RELEASE_NULL(balloons);
+    if (NULL != mBalloons) {
+        mBalloons->removeAllObjects();
+        CC_SAFE_RELEASE_NULL(mBalloons);
     }
 }
 
@@ -220,7 +220,7 @@ Box *MapLayer::boxWithPosition(cocos2d::CCPoint position)
     CCPoint tileCoordinate = this->tileCoordinateWithPosition(position);
     
     CCObject *object;
-    CCARRAY_FOREACH(this->boxes, object) {
+    CCARRAY_FOREACH(this->mBoxes, object) {
         Box *boxObject = (Box *)object;
         CCPoint boxCoordinate = this->tileCoordinateWithPosition(boxObject->getPosition());
 //        CCLOG("tileCoordinate(%f, %f), boxCoordinate(%f, %f)", tileCoordinate.x, tileCoordinate.y, boxCoordinate.x, boxCoordinate.y);
@@ -244,7 +244,7 @@ Balloon *MapLayer::balloonWithPosition(cocos2d::CCPoint position)
     CCPoint tileCoordinate = this->tileCoordinateWithPosition(position);
     
     CCObject *object;
-    CCARRAY_FOREACH(balloons, object) {
+    CCARRAY_FOREACH(mBalloons, object) {
         Balloon *balloonObject = (Balloon *)object;
         CCPoint balloonCoordinate = this->tileCoordinateWithPosition(balloonObject->getPosition());
         if (tileCoordinate.equals(balloonCoordinate)) {
@@ -258,4 +258,18 @@ Balloon *MapLayer::balloonWithPosition(cocos2d::CCPoint position)
         CCLog("balloonWithPosition: (balloon == NULL)");
     }
     return balloon;
+}
+
+bool MapLayer::isTaskDoneStatus()
+{
+    bool isFinished = true;
+    CCObject *object;
+    CCARRAY_FOREACH(this->mBalloons, object) {
+        Balloon *balloonObject = (Balloon *)object;
+        if (!balloonObject->isExistBox()) {
+            isFinished = false;
+            break;
+        }
+    }
+    return isFinished;
 }

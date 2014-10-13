@@ -32,9 +32,8 @@ Level *Level::create(cocos2d::CCDictionary *dict)
 
 bool Level::initWithLevelNumber(unsigned int levelNumber)
 {
-    number = levelNumber;
-    mapName = CCString::createWithFormat("map_%d.tmx", levelNumber);
-    
+    this->mNumber = levelNumber;
+    this->mMapName = CCString::createWithFormat("map_%d.tmx", levelNumber);
     return true;
 }
 
@@ -42,23 +41,23 @@ bool Level::initWithDictionary(cocos2d::CCDictionary *dict)
 {
     std::string key = "level";
     CCString *value = (CCString *)dict->objectForKey(key);
-    number = value->uintValue();
+    this->mNumber = value->uintValue();
     
     key = "map";
     value = (CCString *)dict->objectForKey(key);
-    mapName = CCString::create(value->m_sString);
+    this->mMapName = CCString::create(value->m_sString);
     
     key = "background_music";
     value = (CCString *)dict->objectForKey(key);
-    backgroundMusic = CCString::create(value->m_sString);
+    this->mBackgroundMusic = CCString::create(value->m_sString);
     
     key = "push_effect";
     value = (CCString *)dict->objectForKey(key);
-    pushEffect = CCString::create(value->m_sString);
+    this->mPushEffect = CCString::create(value->m_sString);
     
     key = "finish_effect";
     value = (CCString *)dict->objectForKey(key);
-    finishEffect = CCString::create(value->m_sString);
+    this->mFinishEffect = CCString::create(value->m_sString);
     
     return true;
 }

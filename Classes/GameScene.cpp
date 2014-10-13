@@ -28,7 +28,7 @@ CCScene *GameScene::scene(Level *pLevel)
 {
     CCScene *scene = CCScene::create();
     
-    CCLOG("pLevel->mapName: %s", pLevel->mapName->getCString());
+    CCLOG("pLevel->mapName: %s", pLevel->mMapName->getCString());
     
     GameScene *gameLayer = GameScene::create(pLevel);
     scene->addChild(gameLayer);
@@ -76,7 +76,7 @@ bool GameScene::init()
     
     //关卡
     Level *currentLevel = LevelManager::sharedInstance()->getCurrentLevel();
-    CCLOG("currentLevel->mapName: %s", currentLevel->mapName->getCString());
+    CCLOG("currentLevel->mapName: %s", currentLevel->mMapName->getCString());
     
     //根据关卡初始化地图
     mMapLayer = MapLayer::create(currentLevel);
@@ -95,8 +95,8 @@ bool GameScene::init()
     //控制层
     mControlLayer = ControlLayer::create();
     mControlLayer->setPosition(origin.x, origin.y);
-    mControlLayer->mapLayer = mMapLayer;
-    mControlLayer->man = man;
+    mControlLayer->setMapLayer(mMapLayer);
+    mControlLayer->setMan(man);
     this->addChild(mControlLayer);
     
     //menu
@@ -137,8 +137,8 @@ bool GameScene::initWithLevel(Level *pLevel)
     mControlLayer = ControlLayer::create();
     mControlLayer->setPosition(origin.x, origin.y);
     mControlLayer->setDelegate(this);
-    mControlLayer->mapLayer = mMapLayer;
-    mControlLayer->man = man;
+    mControlLayer->setMapLayer(mMapLayer);
+    mControlLayer->setMan(man);
     this->addChild(mControlLayer);
     
     //menu

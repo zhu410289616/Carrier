@@ -24,19 +24,20 @@ public:
 
 class ControlLayer : public cocos2d::CCLayer {
 private:
-    CCPoint mBeginPoint;
-    CCPoint mEndPoint;
+    MapLayer *mMapLayer;
+    Man *mMan;
     
     ControlLayerDelegate *mDelegate;
     
-public:
-    MapLayer *mapLayer;
-    Man *man;
+    CCPoint mBeginPoint;
+    CCPoint mEndPoint;
     
 public:
     virtual bool init();
     CREATE_FUNC(ControlLayer);
     
+    void setMapLayer(MapLayer *mapLayer);
+    void setMan(Man *man);
     void setDelegate(ControlLayerDelegate *delegate);
     
 protected:
@@ -52,7 +53,6 @@ protected:
     MoveCheckCode shouldMoveOfManWithPosition(CCPoint nextPosition);
     MoveCheckCode shouldMoveOfBoxWithPosition(CCPoint nextPosition);
     
-    bool isTaskDone();
     void taskFinished();
 };
 
